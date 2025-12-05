@@ -1,0 +1,141 @@
+
+.nav__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px 36px;
+}
+
+.name__wrapper {
+    gap: 16px;
+    font-size: 14px;
+    padding: 16px 8px;
+    display: flex;
+    cursor: pointer;
+}
+
+.name {
+    font-weight: 700;
+}
+
+.intro {
+    color: #1a1b1c83;
+}
+
+.code {
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    padding: 8px;
+}
+
+.left_part , .right_part {
+    position: fixed;
+    top: 25%;
+
+    height: 400px;
+    width: 400px;
+    /* transform: rotate(45deg); */
+    border: 1px dotted #1a1b1c83;
+}
+
+.left_part {
+    left: 0;
+    transform: translateX(-60%) rotate(45deg) ;
+}
+
+.right_part {
+    right: 0;
+    transform: translateX(60%) rotate(45deg) ;
+}
+
+.title__wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40vw;
+    height: 40vh;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: left; */
+    font-size: 80px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.second {
+    padding-left: 16px;
+}
+
+.description {
+    position: fixed;
+    bottom: 48px;
+    left: 28px;
+    line-height: 1.2;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.left-btn__wrapper {
+    position: fixed;
+    top: 50%;
+    left: 120px;
+    transform: translate(-50%, -130%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.right-btn__wrapper {
+    position: fixed;
+    top: 50%;
+    right: -20px;
+    transform: translate(-50%, -130%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-frame {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg) scale(0.9);
+    transition: all 300ms ease;
+    cursor: pointer;
+}
+
+.left-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-80%, -30%) rotate(135deg) scale(0.9);
+    color: black;
+}
+
+.right-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: rotate(-45deg) translate(30%, -60%)  scale(0.9);
+    color: black;
+}
+
+.left-btn__wrapper .btn-frame:hover {
+    transform:rotate(45deg) scale(1.05);
+}
+
+.right-btn__wrapper .btn-frame:hover {
+    transform:rotate(45deg) scale(1.05);
+}
