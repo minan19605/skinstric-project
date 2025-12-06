@@ -20,27 +20,48 @@
 
 .square {
     position: absolute;
-    border: 1px dotted #1A1B1C83;
+    background: transparent;
+    box-sizing: border-box;
+    
+    /* 1. 定义颜色、厚度、间隙的默认变量 */
+    --dot-color: #1A1B1C9F; /* 默认颜色，将被子类覆盖 */
+    --line-thickness: 1px;
+    --gap-size: 10px;
+    --pattern: var(--dot-color) 0 var(--line-thickness), transparent var(--line-thickness) var(--gap-size);
+
+    /* 2. 使用变量构建稀疏虚线背景 */
+    background:
+        /* 上边 */
+        repeating-linear-gradient(90deg, var(--pattern)) top/100% var(--line-thickness) no-repeat,
+        /* 下边 */
+        repeating-linear-gradient(90deg, var(--pattern)) bottom/100% var(--line-thickness) no-repeat,
+        /* 左边 */
+        repeating-linear-gradient(0deg, var(--pattern)) left/var(--line-thickness) 100% no-repeat,
+        /* 右边 */
+        repeating-linear-gradient(0deg, var(--pattern)) right/var(--line-thickness) 100% no-repeat;
 }
 
+
 .square_1 {
-    width: 762px;
-    height: 762px;
-    animation: rotate 30s linear infinite;
+    width: 560px;
+    height: 560px;
+    --dot-color: rgba(0, 0, 0, 0.5);
+    animation: rotate 60s linear infinite;
     transform: rotate(30deg);
 }
 
 .square_2 {
-    width: 682px;
-    height: 682px;
-    animation: rotate 26s linear infinite;
+    width: 532px;
+    height: 532px;
+    animation: rotate 46s linear infinite;
     transform: rotate(-45deg);
 }
 
 .square_3 {
-    width: 602px;
-    height: 602px;
-    animation: rotate 20s linear infinite;
+    width: 502px;
+    height: 502px;
+    --dot-color: rgba(0, 0, 0, 0.9);
+    animation: rotate 40s linear infinite;
     transform: rotate(90deg);
 }
 
@@ -51,9 +72,121 @@
 .centerInput {
     position: relative;
     z-index: 10;
-    padding: 8px 12px;
-    font-size: 16px;
-    border-bottom: 2px solid #555;
+    /* padding: 8px 12px; */
+    font-size: 60px;
+    border-bottom: 1px solid #555;
+    text-align: center;
     outline: none;
-    width: 200px;
+    width: 500px;
+}
+
+.row_wrapper {
+    position: fixed;
+    bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    padding: 24px 48px;
+}
+
+.left-btn__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.right-btn__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    display: none;
+}
+
+.btn-frame {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg) ;
+    transition: all 300ms ease;
+    cursor: pointer;
+}
+
+.left-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-80%, -30%) rotate(135deg) scale(0.9);
+    color: black;
+}
+
+.right-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: rotate(-45deg) translate(30%, -60%)  scale(0.9);
+    color: black;
+}
+
+.left-btn__wrapper .btn-frame:hover {
+    transform:rotate(45deg) scale(1.05);
+}
+
+.right-btn__wrapper .btn-frame:hover {
+    transform:rotate(45deg) scale(1.05);
+}
+
+.btn-content {
+    font-weight: bold;
+}
+
+.inner-content {
+    display: none;
+}
+
+@media (max-width:768px) {
+    .square_1 {
+        width: 480px;
+        height: 480px;
+    }
+
+.square_2 {
+        width: 400px;
+        height: 400px;
+    }
+
+.square_3 {
+        width: 320px;
+        height: 320px;
+    }
+}
+
+@media (max-width:640px) {
+    .centerInput {
+        font-size: 40px;
+        width: 360px;
+    }
+    .left-play, .right-play {
+        display: none;
+    }
+
+    .btn-content {
+        display: none;
+    }
+
+    .inner-content {
+        display: block;
+        color: black;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg) ;
+        font-size: 12px;
+        font-weight: bold;
+    }
 }
