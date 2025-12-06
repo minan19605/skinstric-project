@@ -1,5 +1,7 @@
 'use client';
 
+import Nav from "@/components/Nav";
+import Link from "next/link";
 import { useEffect } from "react";
 // import Image from "next/image";
 import { FaPlay } from "react-icons/fa";
@@ -36,18 +38,12 @@ export default function Home() {
   
   return (
     <>
-    <nav className="nav__wrapper">
-      <div className="name__wrapper">
-        <div className="name">SKINSTRIC</div>
-        <div className="intro">[ INTRO ]</div>
-      </div>
-      <button className="code">
-        ENTER CODE
-      </button>
-    </nav>
+    <Nav />
     <div id="animation-container">
       <div id="left-frame" className="left_part"></div>
       <div id="right-frame" className="right_part"></div>
+      <div className="outside_frame"></div>
+      <div className="inner_frame"></div>
       <div id="left-btn" className="left-btn__wrapper">
         <div className="btn-frame">
           <FaPlay size={12} className="left-play"/>
@@ -56,10 +52,13 @@ export default function Home() {
       </div>
       <div id="right-btn" className="right-btn__wrapper">
         <div className="btn-content">TAKE TEST</div>
-        <div className="btn-frame">
-          <FaPlay size={12} className="right-play"/>
-        </div>
+        <Link href="/testing">
+          <div className="btn-frame">
+            <FaPlay size={12} className="right-play"/>
+          </div>
+        </Link>
       </div>
+      
       <div id="middle-text" className="title__wrapper">
         <p className="top">Sophisticated</p>
         <p className="second">skincare</p>
@@ -70,6 +69,14 @@ export default function Home() {
       highly-personalized routine tailored to<br/>
       what your skin needs.
     </div>
+    <Link href="/testing">
+    <button className="enter">
+      <span>ENTER EXPERIENCE</span>
+      <div className="btn-frame">
+        <FaPlay size={12} className="right-play"/>
+      </div>
+    </button>
+    </Link>
     </>
   );
 }
