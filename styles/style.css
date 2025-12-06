@@ -210,3 +210,108 @@
     opacity: 0;
     transform: translateX(-100%) scale(0);
 }
+
+.outside_frame, .inner_frame {
+    display: none;
+}
+
+.enter {
+    display: none;
+}
+
+@media (max-width:1024px) {
+    .left_part , .right_part,
+    .left-btn__wrapper, .right-btn__wrapper {
+        display: none;
+        opacity: 0;
+    }
+
+    .title__wrapper {
+        top: 42%;
+        font-size: 60px;
+        transform: translate(-50%, -50%);
+    }
+    
+    .outside_frame, .inner_frame {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+
+        border: 1px dotted #1a1b1c83;
+        display: block;
+    }
+
+    .outside_frame {
+        width: 420px;
+        height: 420px;
+    }
+    
+    .inner_frame {
+        width: 350px;
+        height: 350px;
+    }
+
+    .description {
+        /* font-size: 14px; */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 10%);
+        text-transform: none;
+        max-height: fit-content;
+        width: 300px;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .enter {
+        display: flex;
+        font-size: 12px;
+        font-weight: bold;
+        gap: 16px;
+        align-items: center;
+        position: fixed;
+        top: 62%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+        transition: all 300ms ease;
+        cursor: pointer;
+    }
+
+    .enter:hover {
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+}
+
+@media (max-width: 768px) {
+    .title__wrapper {
+        top: 40%;
+    }
+
+    .description {
+        top: 47%;
+    }
+
+    .enter {
+        top: 58%;
+    }
+}
+
+@media (max-width: 640px) {
+    .outside_frame, .inner_frame {
+        transform: translate(-50%, -50%) rotate(45deg) scale(0.8);
+    }
+    .title__wrapper {
+        font-size: 44px;
+        font-weight: 300;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .enter {
+        transform: translate(-50%, -50%) scale(0.8)
+    }
+}
