@@ -1,0 +1,59 @@
+.title {
+    font-size: 14px;
+    font-weight: bolder;
+    margin-left: 44px;
+}
+
+.container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    padding: 20px;
+    margin: 40px auto;
+}
+
+.square {
+    position: absolute;
+    border: 1px dotted #1A1B1C83;
+}
+
+.square_1 {
+    width: 762px;
+    height: 762px;
+    animation: rotate 30s linear infinite;
+    transform: rotate(30deg);
+}
+
+.square_2 {
+    width: 682px;
+    height: 682px;
+    animation: rotate 26s linear infinite;
+    transform: rotate(-45deg);
+}
+
+.square_3 {
+    width: 602px;
+    height: 602px;
+    animation: rotate 20s linear infinite;
+    transform: rotate(90deg);
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+.centerInput {
+    position: relative;
+    z-index: 10;
+    padding: 8px 12px;
+    font-size: 16px;
+    border-bottom: 2px solid #555;
+    outline: none;
+    width: 200px;
+}
