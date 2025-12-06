@@ -10,7 +10,7 @@ export default function Nav() {
         </Link>
         <div className="intro">[ INTRO ]</div>
       </div>
-      <button className="code">
+      <button suppressHydrationWarning className="btn-code">
         ENTER CODE
       </button>
     </nav>
