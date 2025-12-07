@@ -6,6 +6,7 @@ import React, { useCallback, useState } from 'react'
 import styles from './page.module.css'
 import { FaPlay } from 'react-icons/fa';
 import Link from 'next/link';
+import WaveDot from '@/components/WaveDot';
 
 interface UserData {
     name: string;
@@ -17,7 +18,6 @@ const API_URL = "https://us-central1-frontend-simplified.cloudfunctions.net/skin
 enum InputStep {
     NAME = 'name',
     LOCATION = 'location',
-    LOADING = 'loading',
     COMPLETED = 'completed',
 }
 
@@ -64,7 +64,7 @@ export default function Page() {
     const [error, setError] = useState<string>("")
     const [placeholderContent, setPlaceholderContent] = useState<string>('Introduce Yourself')
     const [inputValue, setInputValue] = useState<string>('')
-    const [isLoding, setLoading] = useState<boolean>(false)
+    const [isLoading, setLoading] = useState<boolean>(false) // waiting for server side response after submit data
 
     const handleInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value)
@@ -123,16 +123,15 @@ export default function Page() {
                 setData(prev => ({...prev, location:value}))
                 // console.log('Step 2 User data: ', data)
 
-                setStep(InputStep.LOADING)
-                // setError('')
-                // setPlaceholderContent('Introduce Yourself')
-                // setInputValue('')
                 setLoading(true)
 
                 try {
                     await submitUserData(finalData)
                     setStep(InputStep.COMPLETED)
-                    setError('Submit data Success!')
+
+                    setPlaceholderContent('Introduce Yourself')
+                    setInputValue('')
+                    setError('')
                 }catch (error) {
                     setError('Submit data failure, try again!')
                     console.log('submit error: ', error)
@@ -160,14 +159,31 @@ export default function Page() {
             <div className={`${styles.square} ${styles.square_1}`}></div>
             <div className={`${styles.square} ${styles.square_2}`}></div>
             <div className={`${styles.square} ${styles.square_3}`}></div>
-            <div className='flex flex-col items-center'>
-                <p className="text-sm text-gray-400 uppercase mb-1">CLICK TO TYPE</p>
-                {error && (<p className="text-sm text-red-500 mb-2">{error}</p>)}
-                <input suppressHydrationWarning type='text' className={styles.centerInput} placeholder={placeholderContent}
-                value={inputValue}
-                onChange={handleInput}
-                onKeyDown={handleKeyDown} />
-            </div>
+            
+            {isLoading ? 
+                <div className='flex flex-col items-center'>
+                    <p className="text-lg text-gray-400 mb-6">Processing submission</p>
+                    <WaveDot />
+                </div>
+                :
+                <>
+                {step === InputStep.COMPLETED ? 
+                    <div className='flex flex-col items-center gap-4 z-10'>
+                        <p className='text-2xl font-normal text-[#1A1B1C] tracking-wide'>Thank you!</p>
+                        <p className='text-lg text-gray-600'>Proceed for the next step</p>
+                    </div> 
+                    :
+                    <div className='flex flex-col items-center'>
+                        <p className="text-sm text-gray-400 uppercase mb-1">CLICK TO TYPE</p>
+                        {error && (<p className="text-sm text-red-500 mb-2">{error}</p>)}
+                        <input suppressHydrationWarning type='text' className={styles.centerInput} placeholder={placeholderContent}
+                        value={inputValue}
+                        onChange={handleInput}
+                        onKeyDown={handleKeyDown} />
+                    </div>
+                }
+                </>
+            }
         </div>
         <div className={styles.row_wrapper}>
             <Link href="/">
@@ -179,12 +195,13 @@ export default function Page() {
                     <div className={styles["btn-content"]}>BACK</div>
                 </div>
             </Link>
-            <Link href="/testing">
-                <div className={styles["right-btn__wrapper"]}>
-                    <div className={styles["btn-content"]}>Need TEST</div>
+            <Link href="/result">
+                <div className={`${styles["right-btn__wrapper"]} 
+                                ${step === InputStep.COMPLETED ? styles["show_btn"] : ""}`}>
+                    <div className={styles["btn-content"]}>PROCEED</div>
                     <div className={styles["btn-frame"]}>
                         <FaPlay size={12} className={styles["right-play"]}/>
-                        <div className={styles["inner-content"]}>TEST</div>
+                        <div className={styles["inner-content"]}>PROCEED</div>
                     </div>
                 </div>
             </Link>
