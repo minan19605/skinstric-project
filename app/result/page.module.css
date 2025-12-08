@@ -1,22 +1,40 @@
+
 .title {
     font-size: 14px;
     font-weight: bolder;
     margin-left: 44px;
 }
 
-.container {
+
+
+.preview-wrapper {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 80px;
+    right: 40px;
+}
+
+.para {
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.preview-box {
+    width: 128px;
+    height: 128px;
+    border: 1px solid #1A1B1C9F;
+}
+
+.container {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw;
-    max-width: 100%;
+    width: 50%;
+    height: 50vh;
     padding: 20px;
-    margin: 40px auto;
+    margin: 80px auto;
 }
 
 .square {
@@ -44,23 +62,24 @@
 
 
 .square_1 {
-    width: 560px;
-    height: 560px;
-    --dot-color: rgba(0, 0, 0, 0.5);
+    width: 280px;
+    height: 280px;
+    --dot-color: rgba(0, 0, 0, 0.3);
     animation: rotate 60s linear infinite;
     transform: rotate(30deg);
 }
 
 .square_2 {
-    width: 532px;
-    height: 532px;
+    width: 260px;
+    height: 260px;
+    --dot-color: rgba(0, 0, 0, 0.5);
     animation: rotate 46s linear infinite;
     transform: rotate(-45deg);
 }
 
 .square_3 {
-    width: 502px;
-    height: 502px;
+    width: 240px;
+    height: 240px;
     --dot-color: rgba(0, 0, 0, 0.9);
     animation: rotate 40s linear infinite;
     transform: rotate(90deg);
@@ -70,16 +89,54 @@
   to { transform: rotate(360deg); }
 }
 
-.centerInput {
-    position: relative;
-    z-index: 10;
-    /* padding: 8px 12px; */
-    font-size: 60px;
-    color: #1A1B1C83;
-    border-bottom: 1px solid #555;
-    text-align: center;
-    outline: none;
-    width: 500px;
+.icon-wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 480px;
+    height: 480px;
+}
+
+.icon {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.icon:hover {
+    transform: scale(1.1);
+}
+
+.camera .scan_line {
+    position: absolute;
+    bottom: 206px;
+    right: 130px;
+    transform: translateY(-100%);
+    display: flex;
+}
+
+.camera .indication{
+    position: absolute;
+    top: 136px;
+    right: -16px;
+    font-size: 14px;
+}
+
+.upload .scan_line {
+    position: absolute;
+    bottom: 100px;
+    left: 128px;
+    transform: translateY(-100%) rotate(180deg) ;
+    display: flex;
+}
+
+.upload .indication{
+    position: absolute;
+    bottom: 140px;
+    left: 4px;
+    font-size: 14px;
+    text-align: end;
 }
 
 .row_wrapper {
@@ -98,22 +155,6 @@
     gap: 24px;
 }
 
-.right-btn__wrapper {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    transform: translateX(-20px);
-
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.show_btn {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0px);
-}
 
 .btn-frame {
     position: relative;
@@ -136,19 +177,8 @@
     color: black;
 }
 
-.right-play {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: rotate(-45deg) translate(30%, -60%)  scale(0.9);
-    color: black;
-}
 
 .left-btn__wrapper .btn-frame:hover {
-    transform:rotate(45deg) scale(1.05);
-}
-
-.right-btn__wrapper .btn-frame:hover {
     transform:rotate(45deg) scale(1.05);
 }
 
@@ -158,60 +188,4 @@
 
 .inner-content {
     display: none;
-}
-
-.loading_dots::after {
-    content: '...';
-    font-size: 32px;
-    font-weight: 700;
-    animation: dots 1s steps(4, jump-none) infinite;
-}
-
-@keyframes dots {
-    0%  {content: '';}
-    25% {content: '.';}
-    50% {content: '..';}
-    75% {content: '...';}
-}
-
-@media (max-width:768px) {
-    .square_1 {
-        width: 480px;
-        height: 480px;
-    }
-
-.square_2 {
-        width: 400px;
-        height: 400px;
-    }
-
-.square_3 {
-        width: 320px;
-        height: 320px;
-    }
-}
-
-@media (max-width:640px) {
-    .centerInput {
-        font-size: 40px;
-        width: 360px;
-    }
-    .left-play, .right-play {
-        display: none;
-    }
-
-    .btn-content {
-        display: none;
-    }
-
-    .inner-content {
-        display: block;
-        color: black;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(-45deg) ;
-        font-size: 12px;
-        font-weight: bold;
-    }
 }
