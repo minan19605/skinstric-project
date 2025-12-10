@@ -189,3 +189,47 @@
 .inner-content {
     display: none;
 }
+
+.camera_confirmation_modal {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 360px;
+    background-color: #1A1B1C;
+
+    color: white;
+    
+}
+
+.confirmation-title {
+    padding: 16px 0 16px 24px;
+    margin-bottom: 16px;
+}
+
+.btn-wrapper {
+    display: flex;
+    justify-content: end;
+    border-top: 1px solid white;
+    padding: 8px;
+    gap: 32px;
+}
+
+.deny {
+    font-size: 14px;
+    color: #FFFFFF88;
+}
+
+.deny:hover {
+    color: #FFFFFF66;
+}
+
+.allow {
+    font-weight: 600;
+    padding-right: 8px;
+}
+
+.allow:hover {
+    color: #FFFFFF99;
+}
