@@ -6,6 +6,7 @@ import React, { useRef, useState } from 'react'
 import styles from './page.module.css'
 import { FaPlay } from 'react-icons/fa';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 function convertToBase64(file:File) : Promise<string> {
     return new Promise((resolve, reject) => {
@@ -19,10 +20,7 @@ function convertToBase64(file:File) : Promise<string> {
 export default function Page() {
     const fileInputRef = useRef<HTMLInputElement | null> (null) //Open local image file
 
-    //Access camera
-    const videoRef = useRef<HTMLVideoElement | null>(null)
-    const canvasRef = useRef<HTMLCanvasElement | null>(null)
-    const [isCameraOpen, setIsCameraOpen] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
     const [base64Image, setImage] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
@@ -72,46 +70,11 @@ export default function Page() {
         await uoloadToServer(base64)
     }
 
-    const openCamera = async () => {
-        setIsCameraOpen(true)
-        
-        const stream = await navigator.mediaDevices.getUserMedia(
-            {
-                video: {facingMode: "user"},
-                audio: false
-            }
-        );
+    const router = useRouter();
 
-        if (videoRef.current){
-            videoRef.current.srcObject = stream;
-        }
-    };
-
-    const takePhoto = () => {
-        const video = videoRef.current;
-        const canvas = canvasRef.current;
-
-        if(!video || !canvas) return;
-
-        const ctx = canvas.getContext('2d');
-        if(!ctx) return;
-
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-
-        const base64 = canvas.toDataURL("image/jpeg");
-        setImage(base64);
-
-        //stop camera
-        const stream = video.srcObject as MediaStream;
-        stream.getTracks().forEach(track => track.stop())
-        setIsCameraOpen(false)
-
-        // await uoloadToServer(base64)
+    const handleAllow = () => {
+        router.push("/camera")
     }
-
 
   return (
     <>
@@ -132,7 +95,7 @@ export default function Page() {
                 <div className={`${styles.square} ${styles.square_2}`}></div>
                 <div className={`${styles.square} ${styles.square_3}`}></div>
                 <div className={styles["icon-wrapper"]}>
-                    <button onClick={openCamera}>
+                    <button onClick={()=>setShowModal(true)}>
                         <Image className={styles["icon"]} src="/assets/camera-icon.webp" width={120} height={120} alt="Take photo" />
                     </button>
                     
@@ -165,6 +128,16 @@ export default function Page() {
                 </div>
             </div>
         </div>
+
+        {showModal && 
+        <div className={styles["camera_confirmation_modal"]}>
+            <p className={styles["confirmation-title"]}>ALLOW A.I. TO ACCESS YOUR CAMERA</p>
+            <div className={styles["btn-wrapper"]}>
+                <button className={styles["deny"]} onClick={()=>setShowModal(false)}>DENY</button>
+                <button className={styles["allow"]} onClick={handleAllow}>ALLOW</button>
+            </div>
+        </div>}
+
         <div className={styles.row_wrapper}>
             <Link href="/testing">
                 <div className={styles["left-btn__wrapper"]}>

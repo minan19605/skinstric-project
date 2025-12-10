@@ -1,0 +1,132 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 50vh;
+    padding: 20px;
+    margin: 80px auto;
+}
+
+.square {
+    position: absolute;
+    background: transparent;
+    box-sizing: border-box;
+    
+    /* 1. 定义颜色、厚度、间隙的默认变量 */
+    --dot-color: #1A1B1C9F; /* 默认颜色，将被子类覆盖 */
+    --line-thickness: 1px;
+    --gap-size: 6px;
+    --pattern: var(--dot-color) 0 var(--line-thickness), transparent var(--line-thickness) var(--gap-size);
+
+    /* 2. 使用变量构建稀疏虚线背景 */
+    background:
+        /* 上边 */
+        repeating-linear-gradient(90deg, var(--pattern)) top/100% var(--line-thickness) no-repeat,
+        /* 下边 */
+        repeating-linear-gradient(90deg, var(--pattern)) bottom/100% var(--line-thickness) no-repeat,
+        /* 左边 */
+        repeating-linear-gradient(0deg, var(--pattern)) left/var(--line-thickness) 100% no-repeat,
+        /* 右边 */
+        repeating-linear-gradient(0deg, var(--pattern)) right/var(--line-thickness) 100% no-repeat;
+}
+
+
+.square_1 {
+    width: 280px;
+    height: 280px;
+    --dot-color: rgba(0, 0, 0, 0.3);
+    animation: rotate 60s linear infinite;
+    transform: rotate(30deg);
+}
+
+.square_2 {
+    width: 260px;
+    height: 260px;
+    --dot-color: rgba(0, 0, 0, 0.5);
+    animation: rotate 46s linear infinite;
+    transform: rotate(-45deg);
+}
+
+.square_3 {
+    width: 240px;
+    height: 240px;
+    --dot-color: rgba(0, 0, 0, 0.9);
+    animation: rotate 40s linear infinite;
+    transform: rotate(90deg);
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+.icon-wrapper {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 480px;
+    height: 480px;
+
+    animation: changeScale 1s ease-in-out infinite;
+}
+
+@keyframes changeScale {
+    0% {
+        transform: scale(0.9);
+    }
+
+    40% {
+        transform: scale(1);
+        color: black;
+    }
+
+    80% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        color: #1A1B1C9F;
+    }
+}
+
+.indication {
+    margin-top: 12px;
+    color: #1A1B1C9F;
+}
+
+.discriptions {
+    font-size: 16px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: -80px;
+}
+
+.methods__wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 32px;
+    padding: 32px;
+}
+
+.method {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.small__square {
+    border: 1px solid black;
+    /* background-color: blueviolet; */
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+}
