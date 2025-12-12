@@ -46,7 +46,7 @@ export default function Page() {
     </div>
 
     <div className={styles.row_wrapper}>
-        <Link href="/">
+        <Link href="/testing">
             <div className={styles["left-btn__wrapper"]}>
                 <div className={styles["btn-frame"]}>
                     <FaPlay size={12} className={styles["left-play"]}/>
@@ -55,12 +55,12 @@ export default function Page() {
                 <div className={styles["btn-content"]}>BACK</div>
             </div>
         </Link>
-        <Link href="/result">
+        <Link href="/">
             <div className={styles["right-btn__wrapper"]} >
-                <div className={styles["btn-content"]}>GET SUMMARY</div>
+                <div className={styles["btn-content"]}>HOME</div>
                 <div className={styles["btn-frame"]}>
                     <FaPlay size={12} className={styles["right-play"]}/>
-                    <div className={styles["inner-content"]}>SUM</div>
+                    <div className={styles["inner-content"]}>HOME</div>
                 </div>
             </div>
         </Link>
