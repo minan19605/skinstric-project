@@ -25,6 +25,8 @@ export default function Page() {
     const [base64Image, setImage] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
 
+    const router = useRouter();
+
     const handleButtonClick = () => {
         fileInputRef.current?.click()
     }
@@ -43,9 +45,21 @@ export default function Page() {
                 }
             )
 
+            if(!response.ok) {
+                throw new Error(`HTTP error: ${response.status || response.statusText}`)
+            }
+
             const result = await response.json();
-            console.log("Upload image result is: ", result)
+            if(result.success === false) {
+                throw new Error(result.message)
+            }
+
+            const data = await result.data
+            sessionStorage.setItem("serverData", JSON.stringify(data))
+
+            console.log("Upload image result is: ", data)
             alert("Upload the Image success!")
+            router.push('/select')
 
         }catch(err) {
             console.log("Upload image error ", err)
@@ -70,7 +84,6 @@ export default function Page() {
         await uoloadToServer(base64)
     }
 
-    const router = useRouter();
 
     const handleAllow = () => {
         router.push("/camera")
