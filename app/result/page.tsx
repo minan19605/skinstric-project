@@ -7,6 +7,7 @@ import styles from './page.module.css'
 import { FaPlay } from 'react-icons/fa';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import WaveDot from '@/components/WaveDot';
 
 function convertToBase64(file:File) : Promise<string> {
     return new Promise((resolve, reject) => {
@@ -58,7 +59,7 @@ export default function Page() {
             sessionStorage.setItem("serverData", JSON.stringify(data))
 
             console.log("Upload image result is: ", data)
-            alert("Upload the Image success!")
+            alert("Image analyzed successfully!")
             router.push('/select')
 
         }catch(err) {
@@ -102,7 +103,18 @@ export default function Page() {
             </div>
         </div>
 
-        <div className="flex flex-row">
+        {loading? 
+        (<div className={styles.container}>
+            <div className={`${styles.square} ${styles.square_1}`}></div>
+            <div className={`${styles.square} ${styles.square_2}`}></div>
+            <div className={`${styles.square} ${styles.square_3}`}></div>
+            <div className='flex flex-col items-center'>
+                <p className="text-lg text-gray-400 mb-6">PREPARING YOUR ANALYSIS...</p>
+                <WaveDot />
+            </div>
+        </div>)
+            :
+        (<div className="flex flex-row">
             <div className={styles.container}>
                 <div className={`${styles.square} ${styles.square_1}`}></div>
                 <div className={`${styles.square} ${styles.square_2}`}></div>
@@ -140,16 +152,17 @@ export default function Page() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>)}
 
         {showModal && 
-        <div className={styles["camera_confirmation_modal"]}>
-            <p className={styles["confirmation-title"]}>ALLOW A.I. TO ACCESS YOUR CAMERA</p>
-            <div className={styles["btn-wrapper"]}>
-                <button className={styles["deny"]} onClick={()=>setShowModal(false)}>DENY</button>
-                <button className={styles["allow"]} onClick={handleAllow}>ALLOW</button>
+            <div className={styles["camera_confirmation_modal"]}>
+                <p className={styles["confirmation-title"]}>ALLOW A.I. TO ACCESS YOUR CAMERA</p>
+                <div className={styles["btn-wrapper"]}>
+                    <button className={styles["deny"]} onClick={()=>setShowModal(false)}>DENY</button>
+                    <button className={styles["allow"]} onClick={handleAllow}>ALLOW</button>
+                </div>
             </div>
-        </div>}
+        }
 
         <div className={styles.row_wrapper}>
             <Link href="/testing">
