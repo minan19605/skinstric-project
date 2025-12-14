@@ -62,39 +62,11 @@
     font-size: 36px;
 }
 
-.progress-container {
+.info {
+    color: #A0A4AB;
     position: absolute;
-    width: 384px;
-    height: 384px;
-    top: 20%;
-    left: 40%;
-}
-
-.progress-circle {
-    fill: none;
-    stroke-width: 8;
-    transform: rotate(-90deg);
-    transform-origin: center;
-}
-
-.progress-background {
-    stroke: #e0e0e0;
-}
-
-.progress-foreground {
-    stroke: #000;
-    stroke-linecap: round;
-    transition: stroke-dasharray 0.5s ease-in-out;
-}
-
-.progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 32px;
-    font-weight: bold;
-    text-align: center;
+    bottom: -20%;
+    right: 20%;
 }
 
 
@@ -184,14 +156,19 @@
     justify-content: center;
 }
 
-.row_wrapper {
+.footNav_wrapper {
     position: fixed;
     bottom: 24px;
+    left: 0;
+    right: 0;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100vw;
-    padding: 24px 48px;
+    /* width: 100vw; */
+    /* width: 100%; */
+    width: auto;
+    padding: 24px 60px;
 }
 
 .left-btn__wrapper {
@@ -204,7 +181,8 @@
     display: flex;
     align-items: center;
     gap: 24px;
-    transform: translateX(-20px);
+    
+    /* transform: translateX(-20px); */
 
     /* opacity: 0;
     pointer-events: none;
@@ -256,6 +234,60 @@
     display: none;
 }
 
-.info {
-    color: #A0A4AB
+@media (max-width: 768px) {
+    .column_items,
+    .figures,
+    .details {
+        width: 100%;
+    }
+
+    .main_wrapper  {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fig_title{
+        display: none;
+    }
+
+    .figures {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .info {
+        color: #A0A4AB;
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin-top: 16px;
+    }
+}
+
+@media (max-width:640px) {
+    .info {
+        font-size: 14px;
+    }
+
+    .left-play, .right-play {
+        display: none;
+    }
+
+    .btn-content {
+        display: none;
+    }
+
+    .inner-content {
+        display: block;
+        color: black;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg) ;
+        font-size: 12px;
+        font-weight: bold;
+    }
 }
