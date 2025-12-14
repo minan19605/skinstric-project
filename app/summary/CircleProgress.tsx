@@ -55,7 +55,7 @@ export default function CircleProgress({ selectedData }: Props) {
       </svg>
 
       {/* 中心文字（示例） */}
-      <div className={styles["progress-text"]}>{selectedData[1]}%</div>
+      {selectedData && <div className={styles["progress-text"]}>{selectedData[1]}%</div>}
     </div>
   );
 }
