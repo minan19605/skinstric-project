@@ -1,10 +1,15 @@
+'use client'
+
 import Nav from '@/components/Nav'
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './page.module.css'
 import Link from 'next/link'
 import FootNav from '@/components/FootNav'
 
 export default function Page() {
+    type HoverKey = 'EMOGRAPHICS' | 'SKIN' | 'WEATHER' | 'COSMETIC' | null;
+    const [hoverKey, setHoverKey] = useState<HoverKey>(null)
+
   return (
     <>
     <Nav />
@@ -18,31 +23,37 @@ export default function Page() {
 
     <div className={styles.container}>
         <div className={styles["content__wrapper"]}>
+            <div
+                className={`${styles.overlay} ${hoverKey ? styles.overlay_show : ''} ${
+                    hoverKey === 'EMOGRAPHICS' ? styles.overlay_1 :
+                    hoverKey === 'SKIN' ? styles.overlay_2 :
+                    hoverKey === 'WEATHER' ? styles.overlay_3 :
+                    hoverKey === 'COSMETIC' ? styles.overlay_4 : ''
+                }`}
+                >
+                <div className={styles.overlay_inner} />
+            </div>
             <Link href="/summary">
-            <div className={`${styles.content} cursor-pointer! bg-gray-200!`}>
-                <p className={styles["description"]}>EMOGRAPHICS</p>
-                <div className={`${styles.square__wrapper} ${styles.square_1}`}>
-                    <div className={`${styles.square}`}></div>
+                <div className={`${styles.content} cursor-pointer! bg-gray-200!`}
+                    onMouseEnter={() => setHoverKey('EMOGRAPHICS')}
+                    onMouseLeave={() => setHoverKey(null)}>
+                    <p className={styles["description"]}>EMOGRAPHICS</p>
                 </div>
-            </div>
             </Link>
-            <div className={styles.content}>
+            <div className={styles.content}
+                onMouseEnter={() => setHoverKey('SKIN')}
+                onMouseLeave={() => setHoverKey(null)}>
                 <p className={styles["description"]}>SKIN TYPE DETAILS</p>
-                <div className={styles["square__wrapper"]}>
-                <div className={`${styles.square} ${styles.square_2}`}></div>
-                </div>
             </div>
-            <div className={styles.content}>
+            <div className={styles.content}
+                onMouseEnter={() => setHoverKey('WEATHER')}
+                onMouseLeave={() => setHoverKey(null)}>
                 <p className={styles["description"]}>WEATHER</p>
-                <div className={styles["square__wrapper"]}>
-                <div className={`${styles.square} ${styles.square_3}`}></div>
-                </div>
             </div>
-            <div className={styles.content}>
-                <p className={styles["description"]}>CCOSMETIC<br/>ONCERNS</p>
-                <div className={styles["square__wrapper"]}>
-                <div className={`${styles.square} ${styles.square_4}`}></div>
-                </div>
+            <div className={styles.content}
+                onMouseEnter={() => setHoverKey('COSMETIC')}
+                onMouseLeave={() => setHoverKey(null)}>
+                <p className={styles["description"]}>COSMETIC<br/>CONCERNS</p>
             </div>
         </div>
     </div>
