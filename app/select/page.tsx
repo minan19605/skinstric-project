@@ -2,7 +2,7 @@ import Nav from '@/components/Nav'
 import React from 'react'
 import styles from './page.module.css'
 import Link from 'next/link'
-import { FaPlay } from 'react-icons/fa'
+import FootNav from '@/components/FootNav'
 
 export default function Page() {
   return (
@@ -46,27 +46,7 @@ export default function Page() {
             </div>
         </div>
     </div>
-
-    <div className={styles.row_wrapper}>
-        <Link href="/result">
-            <div className={styles["left-btn__wrapper"]}>
-                <div className={styles["btn-frame"]}>
-                    <FaPlay size={12} className={styles["left-play"]}/>
-                    <div className={styles["inner-content"]}>BACK</div>
-                </div>
-                <div className={styles["btn-content"]}>BACK</div>
-            </div>
-        </Link>
-        <Link href="/summary">
-            <div className={styles["right-btn__wrapper"]} >
-                <div className={styles["btn-content"]}>GET SUMMARY</div>
-                <div className={styles["btn-frame"]}>
-                    <FaPlay size={12} className={styles["right-play"]}/>
-                    <div className={styles["inner-content"]}>SUM</div>
-                </div>
-            </div>
-        </Link>
-    </div>
+    <FootNav leftLink="/result" rightLink="/summary" rightName="GET SUMMARY"  rightInnerName="SUM" />
     </>
   )
 }

@@ -98,13 +98,13 @@ export default function Page() {
             <p className={styles["para"]}>Preview</p>
             <div className={styles["preview-box"]}>
                 {base64Image && (
-                    <img src={base64Image} style={{height: '100%', objectFit:'cover'}} />
+                    <img src={base64Image} style={{height: '100%', objectFit:'cover'}} alt='Preview'/>
                 )}
             </div>
         </div>
 
         {loading? 
-        (<div className={styles.container}>
+        (<div className={`${styles.container} ${styles.loading}`}>
             <div className={`${styles.square} ${styles.square_1}`}></div>
             <div className={`${styles.square} ${styles.square_2}`}></div>
             <div className={`${styles.square} ${styles.square_3}`}></div>
@@ -114,7 +114,7 @@ export default function Page() {
             </div>
         </div>)
             :
-        (<div className="flex flex-row">
+        (<div className={styles.photos}>
             <div className={styles.container}>
                 <div className={`${styles.square} ${styles.square_1}`}></div>
                 <div className={`${styles.square} ${styles.square_2}`}></div>

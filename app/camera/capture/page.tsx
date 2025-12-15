@@ -5,19 +5,22 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './page.module.css'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FaPlay } from 'react-icons/fa';
+
+import WaveDot from '@/components/WaveDot';
 
 export default function Page() {
   //Access camera
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const [isCameraOpen, setIsCameraOpen] = useState(false)
+  // const [isCameraOpen, setIsCameraOpen] = useState(false)
 
   const [base64Image, setImage] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
 
   const openCamera = async () => {
-    setIsCameraOpen(true)
+    // setIsCameraOpen(true)
     
     const stream = await navigator.mediaDevices.getUserMedia(
       {
@@ -52,12 +55,13 @@ export default function Page() {
 
       //stop camera
       stopAllCameras()
-      setIsCameraOpen(false)
+      // setIsCameraOpen(false)
       console.log("In take photo, video is: ", video.srcObject)
 
       // console.log("Got the Base 64 image is: ", base64)
   }
-
+  
+  const router = useRouter();
   const uoloadToServer = async (base64: string) => {
         setLoading(true) 
         try {
@@ -74,7 +78,8 @@ export default function Page() {
 
             const result = await response.json();
             console.log("Upload image result is: ", result)
-            alert("Upload the Image success!")
+            alert("Image analyzed successfully!")
+            router.push('/select')
 
         }catch(err) {
             console.log("Upload image error ", err)
@@ -120,7 +125,7 @@ export default function Page() {
       {base64Image ? (
         <>
           {/* for show preview photo at same location */}
-          <img src={base64Image} className={styles["video_area"]} />
+          <img src={base64Image} className={styles["video_area"]} alt='Preview'/>
           <div className={styles["retake__title"]}>GREATE SHOT!</div>
           <div className={styles["retake__wrapper"]}>
             <p className={styles["preview__para"]}>Preview</p>
@@ -155,6 +160,13 @@ export default function Page() {
       }
       {/* Hidden canvas (used for capturing) */}
       <canvas ref={canvasRef} style={{ display: "none" }} />
+
+      {loading && 
+        <div className={styles["loading_modal"]}>
+          <p className={styles["analysis"]}>ANALYZING IMAGE...</p>
+          <WaveDot />
+        </div>
+      }
 
       <div className={styles.row_wrapper}>
         <Link href="/result">

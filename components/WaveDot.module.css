@@ -7,10 +7,10 @@
 .dot_wave span {
   width: 8px;
   height: 8px;
-  background: #bfbfbf; /* light gray like your image */
+  background: #999999; 
   border-radius: 50%;
   display: inline-block;
-  animation: wave 1s infinite ease-in-out;
+  animation: wave 1.2s infinite ease-in-out;
 }
 
 .dot_wave span:nth-child(1) {
@@ -26,10 +26,23 @@
 }
 
 @keyframes wave {
-  0%, 60%, 100% {
+  /* 0% 和 100% 保持在底部 */
+  0%, 100% {
     transform: translateY(0);
   }
-  30% {
-    transform: translateY(-8px); 
+  
+  /* 25% 快速上升 */
+  25% {
+    transform: translateY(-6px); /* 增加位移高度，让波浪更明显 */
+  }
+  
+  /* 50% 回落到中间点 */
+  50% {
+    transform: translateY(-2px);
+  }
+  
+  /* 75% 稍微下沉 (可选：增加回弹感) */
+  75% {
+    transform: translateY(2px); /* 保持在基线 */
   }
 }

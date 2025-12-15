@@ -1,12 +1,12 @@
 'use client';
 
 import Nav from '@/components/Nav'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './page.module.css'
-import Link from 'next/link'
-import { FaPlay } from 'react-icons/fa'
+
 import { useRouter } from 'next/navigation';
 import CircleProgress from './CircleProgress';
+import FootNav from '@/components/FootNav';
 
 type NumericDataMap = {
     [key: string]: number;
@@ -194,27 +194,7 @@ export default function Page() {
             )})}
         </div>
     </main>
-    <div className={styles.footNav_wrapper}>
-        <Link href="/select">
-            <div className={styles["left-btn__wrapper"]}>
-                <div className={styles["btn-frame"]}>
-                    <FaPlay size={12} className={styles["left-play"]}/>
-                    <div className={styles["inner-content"]}>BACK</div>
-                </div>
-                <div className={styles["btn-content"]}>BACK</div>
-            </div>
-        </Link>
-
-        <Link href="/">
-            <div className={styles["right-btn__wrapper"]} >
-                <div className={styles["btn-content"]}>HOME</div>
-                <div className={styles["btn-frame"]}>
-                    <FaPlay size={12} className={styles["right-play"]}/>
-                    <div className={styles["inner-content"]}>HOME</div>
-                </div>
-            </div>
-        </Link>
-    </div>
+    <FootNav leftLink="/select" rightLink="/" rightName="HOME"  rightInnerName="HOME" />
     </>
   )
 }
