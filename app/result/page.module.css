@@ -25,6 +25,11 @@
     border: 1px solid #1A1B1C9F;
 }
 
+.photos {
+    display: flex;
+    flex-direction: row;
+}
+
 .container {
     position: relative;
     display: flex;
@@ -232,4 +237,92 @@
 
 .allow:hover {
     color: #FFFFFF99;
+}
+
+@media (max-width:768px) {
+    .preview-box {
+        width: 96px;
+        height: 96px;
+    }
+
+    .photos {
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        justify-content: center;
+        margin-top: 80px;
+    }
+
+    .icon-wrapper{
+        width: 180px;
+        height: 180px;
+    }
+
+    .container{
+        width: 100%;
+        height: 20vh;
+        margin: 40px 0;
+    }
+
+    .loading {
+        height: 60vh;
+    }
+
+    .square_1 {
+        width: 200px;
+        height: 200px;
+    }
+
+    .square_2 {
+        width: 180px;
+        height: 180px;
+    }
+
+    .square_3 {
+        width: 160px;
+        height: 160px;
+    }
+
+    .camera .scan_line {
+        position: relative;
+        display: none;
+    }
+
+    .camera .indication{
+        position: absolute;
+        top: 148px;
+        right: 36px;
+        font-size: 12px;
+    }
+
+    .upload .scan_line{
+        display: none;
+        position: relative;
+    }
+
+    .upload .indication{
+        position: absolute;
+        top: 148px;
+        right: 36px;
+        font-size: 12px;
+    }
+
+    .left-play, .right-play {
+        display: none;
+    }
+
+    .btn-content {
+        display: none;
+    }
+
+    .inner-content {
+        display: block;
+        color: black;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg) ;
+        font-size: 12px;
+        font-weight: bold;
+    }
 }
