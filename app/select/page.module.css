@@ -16,16 +16,19 @@
     line-height: 2;
 }
 
-.square__wrapper{
+.overlay{
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
 
     background: transparent;
     box-sizing: border-box;
     z-index: 1;
     pointer-events: none; /* 重要: 不干扰 hover */
+    
+    transition: transform 300ms ease, opacity 300mx ease;
 
     /* 1. 定义颜色、厚度、间隙的默认变量 */
     --dot-color: #1A1B1C9F; /* 默认颜色，将被子类覆盖 */
@@ -43,66 +46,44 @@
         repeating-linear-gradient(0deg, var(--pattern)) left/var(--line-thickness) 100% no-repeat,
         /* 右边 */
         repeating-linear-gradient(0deg, var(--pattern)) right/var(--line-thickness) 100% no-repeat;
-
-        transform: scale(0);
-
-    transition: all 300ms ease;
 }
-.square {
-    
+
+.overlay_show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+
+}
+
+.overlay_inner {
     width: 100%;
     height: 100%;
-    
-    pointer-events: none; /* 重要: 不干扰 hover */
-    
 }
 
-.square_1 {
-    width: 420px;
-    height: 420px;
-    --dot-color: rgba(0, 0, 0, 0.5);
-    /* animation: rotate 60s linear infinite;
-    transform: rotate(30deg); */
-}
-
-.square_2 {
-    width: 400px;
-    height: 400px;
-    /* animation: rotate 46s linear infinite;
-    transform: rotate(-45deg); */
-}
-
-.square_3 {
-    width: 480px;
-    height: 480px;
-    --dot-color: rgba(0, 0, 0, 0.9);
-    /* animation: rotate 40s linear infinite;
-    transform: rotate(90deg); */
-}
-
-.square_4 {
-    width: 460px;
-    height: 460px;
-    --dot-color: rgba(0, 0, 0, 0.7);
-    /* animation: rotate 40s linear infinite;
-    transform: rotate(90deg); */
-}
+/* 四种尺寸/颜色（对应你原来的 square_1..4）:contentReference[oaicite:4]{index=4} */
+.overlay_1 { width: 420px; height: 420px; --dot-color: rgba(0,0,0,0.5); }
+.overlay_2 { width: 400px; height: 400px; --dot-color: rgba(0,0,0,0.6); }
+.overlay_3 { width: 480px; height: 480px; --dot-color: rgba(0,0,0,0.9); }
+.overlay_4 { width: 460px; height: 460px; --dot-color: rgba(0,0,0,0.7); }
 
 .container {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-46%, -50%) rotate(45deg);
+    transform: translate(-50%, -50%) rotate(45deg);
     width: 330px;
     height: 330px;
-    /* border: 1px solid red; */
-    
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .content__wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
     /* transform: rotate(45deg); */
 }
@@ -123,17 +104,14 @@
     background-color: #E0E0E0;
 }
 
-.content:hover .square__wrapper{
-
-    transform: translate(-50%, -50%) scale(1);
-}
-
 .description {
     transform: rotate(-45deg);
     font-weight: 600;
 }
 
 @media (max-width:640px) {
+    html, body { overflow-x: hidden; }
+
     .centerInput {
         font-size: 40px;
         width: 360px;
@@ -148,23 +126,8 @@
         height: 136px;
     }
 
-    .square_1 {
-        width: 200px;
-        height: 200px;
-    }
-
-    .square_2 {
-        width: 180px;
-        height: 180px;
-    }
-
-    .square_3 {
-        width: 160px;
-        height: 160px;
-    }
-
-    .square_4 {
-        width: 160px;
-        height: 160px;
-    }
+    /* .overlay_1 { width: 220px; height: 220px; }
+    .overlay_2 { width: 180px; height: 180px; }
+    .overlay_3 { width: 160px; height: 160px; }
+    .overlay_4 { width: 200px; height: 200px; } */
 }
